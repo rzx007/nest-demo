@@ -3,28 +3,38 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  HttpStatus,
+  Logger,
 } from '@nestjs/common';
 
 @Catch(HttpException)
+// 可以继承HttpException拓展错误类型
+// 定义返回错误的统一格式
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
+    // exception当前正在处理的错误对象
     const ctx = host.switchToHttp(); // 获取请求上下文
     const response = ctx.getResponse(); // 获取请求上下文中的 response对象
-    const status = exception.getStatus(); // 获取异常状态码
-
+    const request = ctx.getRequest();
+    // 获取异常状态码
+    const status =
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
     // 设置错误信息
     const message = exception.message
       ? exception.message
       : `${status >= 500 ? 'Service Error' : 'Client Error'}`;
-    const errorResponse = {
-      data: {},
-      message: message,
-      code: -1,
+
+    const msgLog = {
+      statusCode: status,
+      timestamp: new Date().toISOString(),
+      path: request.url,
+      message,
     };
 
+    Logger.error('错误消息', JSON.stringify(msgLog), 'HttpExceptionFilter');
     // 设置返回的状态码， 请求头，发送错误信息
-    response.status(status);
-    response.header('Content-Type', 'application/json; charset=utf-8');
-    response.send(errorResponse);
+    response.status(status).json(msgLog);
   }
 }

@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 
 @Controller('app')
 export class AppController {
+  // 通过 constructor 注入依赖关系
   constructor(private readonly appService: AppService) {}
   // private readonly appService: AppService;
   // constructor(appService: AppService) {

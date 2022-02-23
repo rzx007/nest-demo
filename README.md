@@ -57,6 +57,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+![nest](./public/nest.png)
 
 ## Support
 
@@ -68,6 +69,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 - QuicklyStart - [学完这篇 Nest.js 实战，还没入门的来锤我](https://juejin.cn/post/7032079740982788132)
+-参考资料 -[一例看懂中间件、守卫、管道、异常过滤器、拦截器](https://blog.csdn.net/lxy869718069/article/details/103960790)
 
 ## License
 
