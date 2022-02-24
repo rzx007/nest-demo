@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  StreamableFile,
+  Response,
+} from '@nestjs/common';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 import { AppService } from './app.service';
 
 @Controller('app')
@@ -32,5 +41,14 @@ export class AppController {
   @Put('list/:id')
   update() {
     return 'update';
+  }
+  @Get('file')
+  getFile(@Response({ passthrough: true }) res): StreamableFile {
+    const file = createReadStream(join(process.cwd(), '../package.json'));
+    res.set({
+      'Content-Type': 'application/json',
+      'Content-Disposition': 'attachment; filename="package.json"',
+    });
+    return new StreamableFile(file);
   }
 }

@@ -57,6 +57,12 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## 查看分析文档
+`Compodoc`
+```
+npx compodoc -p tsconfig.json -s
+```
+
 ![nest](./public/nest.png)
 
 ## Support

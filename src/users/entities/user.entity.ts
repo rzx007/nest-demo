@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IsEmail } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
 @Entity('user')
 export class UserEntity {
@@ -17,5 +18,6 @@ export class UserEntity {
   avator_url: string;
 
   @Column()
+  @Exclude() // 查询结果过滤掉此字段
   password: string;
 }
