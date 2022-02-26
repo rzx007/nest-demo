@@ -1,13 +1,13 @@
 /*
  * @Author: 阮志雄
  * @Date: 2022-02-22 17:14:43
- * @LastEditTime: 2022-02-24 15:07:04
+ * @LastEditTime: 2022-02-26 16:07:03
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \nest-demo\src\users\users.service.ts
  */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/index';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -41,8 +41,9 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  // 查询用户
+  findOne(username: string) {
+    return this.usersRepository.findOne({ username });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

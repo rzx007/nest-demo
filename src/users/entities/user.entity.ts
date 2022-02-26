@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { Exclude } from 'class-transformer';
+import { makeSalt } from '../../utils/cryptogram';
 
 @Entity('user')
 export class UserEntity {
@@ -20,4 +21,10 @@ export class UserEntity {
   @Column()
   @Exclude() // 查询结果过滤掉此字段
   password: string;
+
+  // 插入之前对密码加密
+  @BeforeInsert()
+  async encryptPwd() {
+    this.password = makeSalt(this.password);
+  }
 }

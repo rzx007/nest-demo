@@ -6,10 +6,13 @@ import { HttpExceptionFilter } from './core/filter/http-exception.filter';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { LoggerMiddleware } from './core/middleware/logger.middleware';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   // app.setGlobalPrefix('api'); // 设置全局路由前缀
+
+  app.useGlobalGuards(new JwtAuthGuard()); // 全局守卫，验证token授权，是否登录
 
   // 全局中间件
   app.use(new LoggerMiddleware().use);

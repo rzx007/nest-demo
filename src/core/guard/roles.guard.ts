@@ -20,7 +20,7 @@ export class RolesGuard implements CanActivate {
     // 获取请求对象
     const request = context.switchToHttp().getRequest();
     // 获取请求头中的token
-    const token = context.switchToRpc().getData().headers['token'];
+    const token = context.switchToRpc().getData().headers['Authorization'];
     // 白名单直接放行
     if (this.urlList.includes(request.url)) {
       return true;
