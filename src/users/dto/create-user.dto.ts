@@ -21,4 +21,8 @@ export class CreateUserDto {
   @ApiProperty({ example: '123456' })
   @IsString({ message: '确认密码' })
   repassword: string;
+
+  @ApiProperty({ example: '' })
+  @IsString({ message: '角色' })
+  roles: string;
 }

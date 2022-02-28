@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { makeSalt } from '../../utils/cryptogram';
+import { Role } from 'src/constants/role.enum';
 
 @Entity('user')
 export class UserEntity {
@@ -21,6 +22,9 @@ export class UserEntity {
   @Column()
   @Exclude() // 查询结果过滤掉此字段
   password: string;
+
+  @Column({ default: 'admin' })
+  roles: string;
 
   // 插入之前对密码加密
   @BeforeInsert()

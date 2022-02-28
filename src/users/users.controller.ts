@@ -23,6 +23,7 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+
   @Get('all')
   @UseInterceptors(ClassSerializerInterceptor)
   findAll() {
@@ -30,6 +31,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseInterceptors(ClassSerializerInterceptor) // 过滤返回字段
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }

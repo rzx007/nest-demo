@@ -21,7 +21,11 @@ export class AuthService {
 
   //用户正确后,生成token,控制器调用
   async login(user: any): Promise<any> {
-    const payload = { username: user.username, sub: user.id };
+    const payload = {
+      username: user.username,
+      sub: user.id,
+      roles: user.roles,
+    };
     return {
       access_token: this.jwtService.sign(payload),
       username: user.username,

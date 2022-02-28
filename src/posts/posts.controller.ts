@@ -3,7 +3,7 @@ import { RolesGuard } from 'src/core/guard/roles.guard';
 import { PostsService } from './posts.service';
 import { Request } from 'express';
 
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 @Controller('posts')
 export class PostsController {
   private readonly postService: PostsService;
