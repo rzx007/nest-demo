@@ -4,11 +4,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-
+import { Reflector } from '@nestjs/core';
+import { IS_PUBLIC_KEY } from '../constants';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
+  constructor(private readonly reflector: Reflector) {
+    super();
+  }
   // 白名单, 直接放行
-  private urlList: string[] = ['/app', '/auth/login'];
+  private urlList: string[] = ['/app', '/auth/login', '/users/add'];
 
   canActivate(context: ExecutionContext) {
     // 在这里添加自定义的认证逻辑
@@ -18,6 +22,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (this.urlList.includes(request.url)) {
       return true;
     }
+
+    // @SkipJwtAuth() 注解的控制器直接放行
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    // skip
+    if (isPublic) return true;
     return super.canActivate(context);
   }
 

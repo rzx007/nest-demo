@@ -1,6 +1,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 /**
  * passport策略，验证用户登录是否正确，交给守卫使用
@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     // 查询用户是否正确登录
     const users = await this.authService.validateUser(username, password);
     if (!users) {
-      throw new UnauthorizedException();
+      throw new BadRequestException();
     }
     return users;
   }

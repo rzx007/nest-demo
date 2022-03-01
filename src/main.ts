@@ -14,7 +14,10 @@ async function bootstrap() {
   // 全局中间件
   app.use(new LoggerMiddleware().use);
   // 静态资源
-  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.useStaticAssets(join(__dirname, '..', './public'), {
+    prefix: '/static', // 设置虚拟路径
+  }); // http://localhost:3200/static/xxx.png
+
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
 
   // 全局注册拦截器
@@ -34,5 +37,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(3200);
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

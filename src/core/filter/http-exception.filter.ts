@@ -27,6 +27,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       : `${status >= 500 ? 'Service Error' : 'Client Error'}`;
 
     const msgLog = {
+      code: -1,
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,

@@ -9,22 +9,27 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './core/guard/roles.guard';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { RolesModule } from './roles/roles.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
     PostsModule,
     UsersModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'eggweb',
+      database: 'nestweb',
       autoLoadEntities: true,
+      // synchronize: true,
     }),
     AuthModule,
+    RolesModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [

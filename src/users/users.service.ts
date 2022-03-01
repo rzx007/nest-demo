@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2022-02-22 17:14:43
- * @LastEditTime: 2022-02-26 16:07:03
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \nest-demo\src\users\users.service.ts
- */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/index';
 import { UpdateUserDto } from './dto/update-user.dto';
