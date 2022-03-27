@@ -5,12 +5,14 @@ import {
   Put,
   StreamableFile,
   Response,
+  Req,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { AppService } from './app.service';
 import { SkipJwtAuth } from './auth/constants';
+import { Request } from 'express';
 
 @Controller('app')
 export class AppController {
@@ -39,8 +41,8 @@ export class AppController {
   // 可以匹配到 get请求, http://localhost:9080/app/user_xxx
   @Get('user_*')
   @SkipJwtAuth()
-  getUser() {
-    return 'getUser';
+  getUser(@Req() req: Request) {
+    return JSON.stringify(req.headers);
   }
 
   // 3.带参数路径

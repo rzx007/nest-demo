@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 
+//  请求过程中的任意一步出错，都会进入过滤器
 @Catch(HttpException)
 // 可以继承HttpException拓展错误类型
 // 定义返回错误的统一格式
@@ -16,6 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp(); // 获取请求上下文
     const response = ctx.getResponse(); // 获取请求上下文中的 response对象
     const request = ctx.getRequest();
+    console.log('~~~进入异常拦截器~~~');
     // 获取异常状态码
     const status =
       exception instanceof HttpException

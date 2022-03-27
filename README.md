@@ -63,7 +63,7 @@ $ npm run test:cov
 npx compodoc -p tsconfig.json -s
 ```
 
-![nest](./public/nest.png)
+![nest](./statics/nest.png)
 
 ## Support
 
