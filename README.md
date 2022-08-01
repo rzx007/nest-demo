@@ -57,6 +57,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## 快捷创建CURD
+```bash
+nest g resource users
+```
 ## 查看分析文档
 `Compodoc`
 ```

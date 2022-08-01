@@ -6,6 +6,8 @@ import {
   StreamableFile,
   Response,
   Req,
+  Query,
+  Redirect,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createReadStream } from 'fs';
@@ -59,5 +61,13 @@ export class AppController {
       'Content-Disposition': 'attachment; filename="package.json"',
     });
     return new StreamableFile(file);
+  }
+  @Get('docs')
+  @SkipJwtAuth()
+  @Redirect('https://docs.nestjs.com', 302)
+  getDocs(@Query('version') version) {
+    if (version && version === '5') {
+      return { url: 'https://docs.nestjs.com/v5/' };
+    }
   }
 }
