@@ -7,8 +7,10 @@ import { ROLES_KEY } from 'src/decorators/roles.decorator';
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  // context: ExecutionContext;(request, response)引用
+  canActivate(context: ExecutionContext): boolean | Promise<boolean> {
     console.log('2.---进入守卫---');
+    // 获取元数据的值
     const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
       context.getHandler(),
       context.getClass(),

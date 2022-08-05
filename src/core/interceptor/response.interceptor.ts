@@ -1,6 +1,7 @@
 import {
   CallHandler,
   ExecutionContext,
+  createParamDecorator,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
@@ -32,3 +33,10 @@ export class TransformInterceptor implements NestInterceptor {
 扩展基本函数行为
 根据所选条件完全重写函数 (例如, 缓存目的)
 */
+
+export const User = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    return request.user;
+  },
+);

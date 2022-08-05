@@ -7,8 +7,10 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { Express } from 'express';
+import { SkipJwtAuth } from 'src/auth/constants';
 
 @Controller('upload')
+@SkipJwtAuth()
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
