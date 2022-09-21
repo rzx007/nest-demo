@@ -10,7 +10,7 @@ export class RolesGuard implements CanActivate {
   // context: ExecutionContext;(request, response)引用
   canActivate(context: ExecutionContext): boolean | Promise<boolean> {
     console.log('2.---进入守卫---');
-    // 获取元数据的值
+    // 获取元数据的值,判断是否有权限访问
     const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -21,6 +21,7 @@ export class RolesGuard implements CanActivate {
       console.log('2.---守卫结束---');
       return true;
     }
+    // 判断是否登录
     const { user } = context.switchToHttp().getRequest();
     console.log('------------');
     console.log(user);
