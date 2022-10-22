@@ -11,6 +11,7 @@ import { RolesGuard } from './core/guard/roles.guard'
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
 import { RolesModule } from './roles/roles.module'
 import { UploadModule } from './upload/upload.module'
+import { SampleModule } from './sample/sample.module'
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UploadModule } from './upload/upload.module'
     AuthModule,
     RolesModule,
     UploadModule,
+    SampleModule,
   ],
   controllers: [AppController],
   providers: [
