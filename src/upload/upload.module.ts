@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { UploadService } from './upload.service';
-import { UploadController } from './upload.controller';
-import { MulterModule } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { Module } from '@nestjs/common'
+import { UploadService } from './upload.service'
+import { UploadController } from './upload.controller'
+import { MulterModule } from '@nestjs/platform-express'
+import { diskStorage } from 'multer'
 
 @Module({
   imports: [
@@ -10,7 +10,7 @@ import { diskStorage } from 'multer';
       storage: diskStorage({
         destination: './public',
         filename(req, file, cb) {
-          cb(null, file.fieldname + '-' + Date.now() + file.originalname);
+          cb(null, file.fieldname + '-' + Date.now() + file.originalname)
         },
       }),
     }),
