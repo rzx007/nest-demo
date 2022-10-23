@@ -5,10 +5,11 @@ import { Request, Response, NextFunction } from 'express'
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('1.进入请求')
+    console.log('1.中间件进入请求')
     // throw new HttpException('没有授权访问,请先登录', HttpStatus.UNAUTHORIZED);
     // 调用next()进入下一个中间件或者路由
     next()
+    console.log('中间件结束请求')
   }
 }
 

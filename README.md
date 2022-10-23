@@ -85,7 +85,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
-- QuicklyStart - [学完这篇 Nest.js 实战，还没入门的来锤我](https://juejin.cn/post/7032079740982788132) -参考资料 -[一例看懂中间件、守卫、管道、异常过滤器、拦截器](https://blog.csdn.net/lxy869718069/article/details/103960790)
+- QuicklyStart - [学完这篇 Nest.js 实战，还没入门的来锤我](https://juejin.cn/post/7032079740982788132)
+- 参考资料 -[一例看懂中间件、守卫、管道、异常过滤器、拦截器](https://blog.csdn.net/lxy869718069/article/details/103960790)
 
 ## TypeORM + MySQL
 
@@ -107,7 +108,7 @@ npm install --save @nestjs/typeorm typeorm mysql2
 
 **synchronize: true 不要再开发环境开启**
 
-```bash
+```ts
 // src/app.modules.ts
 
 import { Module } from '@nestjs/common';

@@ -8,7 +8,7 @@ export class TransformInterceptor implements NestInterceptor {
     console.log('进入全局拦截器...')
     return next.handle().pipe(
       map((data) => {
-        console.log('返回结果,请求结束!')
+        console.log('全局拦截器结束，返回结果,请求结束!')
         // req.status(200);
         return {
           data,

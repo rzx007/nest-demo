@@ -1,4 +1,17 @@
-import { Controller, Get, Post, Put, StreamableFile, Response, Req, Query, Redirect } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  StreamableFile,
+  Response,
+  Req,
+  Query,
+  Redirect,
+  Param,
+  HostParam,
+  ParseIntPipe,
+} from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { createReadStream } from 'fs'
 import { join } from 'path'
@@ -36,13 +49,15 @@ export class AppController {
 
   // 3.带参数路径
   // 可以匹配到put请求，http://localhost:9080/app/list/xxxx
-  @Put('list/:id')
-  update() {
-    return 'update'
+  @Get('list/:id')
+  @SkipJwtAuth()
+  update(@Param('id', ParseIntPipe) id: string, @HostParam() ip: string) {
+    return { id, ip }
   }
   @Get('file')
+  @SkipJwtAuth()
   getFile(@Response({ passthrough: true }) res): StreamableFile {
-    const file = createReadStream(join(process.cwd(), '../package.json'))
+    const file = createReadStream(join(process.cwd(), './package.json'))
     res.set({
       'Content-Type': 'application/json',
       'Content-Disposition': 'attachment; filename="package.json"',

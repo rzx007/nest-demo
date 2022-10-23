@@ -36,7 +36,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
 
-  await app.listen(3200)
+  await app.listen(3200, 'localhost')
 
   console.log(`Application is running on: ${await app.getUrl()}`)
 }
