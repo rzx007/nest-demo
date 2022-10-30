@@ -3,9 +3,9 @@
 //   return obj.prototype && obj.prototype.isPrototypeOf(obj);
 // }
 export function isConstructor(arg: any) {
-  return arg === 'constructor';
+  return arg === 'constructor'
 }
 // 判断isFunction
 export function isFunction(arg: any) {
-  return typeof arg === 'function';
+  return typeof arg === 'function'
 }
